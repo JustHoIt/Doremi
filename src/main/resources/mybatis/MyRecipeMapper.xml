@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.snsfood.recipe.mapper.MyRecipeMapper">
+
+    <sql id="selectListWhere">
+        <if test="searchType != null and searchValue != null">
+            <choose>
+                <when test="searchType == 'rcpNm'">
+                    and rcp_nm like concat('%', #{searchValue}, '%')
+                </when>
+                <when test="searchType == 'rcpIgdt'">
+                    and rcp_igdt like concat('%', #{searchValue}, '%')
+                </when>
+                <when test="searchType == 'categoryName'">
+                    and category_name like concat('%', #{searchValue}, '%')
+                </when>
+                <otherwise>
+                    and
+                    (
+                    rcp_nm like concat('%', #{searchValue}, '%')
+                    or
+                    rcp_igdt like concat('%', #{searchValue}, '%')
+                    or
+                    category_name like concat('%', #{searchValue}, '%')
+                    )
+                </otherwise>
+            </choose>
+        </if>
+
+    </sql>
+
+    <select id="selectListCount" resultType="long">
+        select count(*)
+        from my_recipe
+        where user_id = #{userId}
+        <include refid="selectListWhere"/>
+    </select>
+
+    <select id="selectList" resultType="com.example.snsfood.recipe.dto.MyRecipeDto">
+        select *
+        from my_recipe
+        where user_id = #{userId}
+        <include refid="selectListWhere"/>
+
+        limit #{pageStart}, #{pageEnd}
+    </select>
+
+</mapper>

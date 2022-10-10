@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>S&S Food- 회원정보페이지입니다.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <style>
+        .list table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        .list table th, .list table td {
+            border:solid 1px #000;
+        }
+
+        p.nothing {
+            text-align: center;
+            padding: 100px;
+        }
+        * {
+            font-family: 'Jua', sans-serif;
+        }
+        a:link {
+        color : black
+        }
+        a:visited {
+        color : black;
+        }
+        a:hover {
+        color : black;
+        }
+        a:active {
+        color : black;
+        }
+        td, th {
+            padding: 15px;
+        }
+        table{
+            width: 600px;
+        }
+        table th{
+            border-color: rgb(194, 194, 253);
+            background-color: rgb(243, 243, 255);
+            padding: 10px;
+        }
+        table td{
+            border-color: rgb(194, 194, 253);
+        }
+    </style>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+        <!-- Custom styles for this template -->
+        <link th:href="@{/css/signin.css}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+
+            $('#updateForm').on('submit', function () {
+
+                if (!confirm('회원 정보를 수정하시겠습니까? ')) {
+                    return false;
+                }
+
+            });
+
+        });
+    </script>
+</head>
+<body class="text-center vsc-initialized">
+<div class="container" id="top">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <a href="/" class="navbar-brand d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <img src="/images/logo_wide.png" alt="Logo" height="100px">
+        </a>
+
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-end mb-md-0">
+            <li class="nav-item">
+                <a class="nav-link" href="#"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">소개</a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">
+                    식품
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                    <li><a class="dropdown-item" href="/food/list" style="color:rgb(87, 87, 87);">목록</a></li>
+                    <li><a class="dropdown-item" href="/food/add" style="color:rgb(87, 87, 87);">식품추가</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">
+                    레시피
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                    <li><a class="dropdown-item" href="/recipe/api-recipe" style="color:rgb(87, 87, 87);">공용 레시피 목록</a>
+                    </li>
+                    <li><a class="dropdown-item" href="/recipe/my-recipe" style="color:rgb(87, 87, 87);">나만의 레시피 목록</a>
+                    </li>
+                    <li><a class="dropdown-item" href="/recipe/add" style="color:rgb(87, 87, 87);">나만의 레시피 추가</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">고객센터</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/board/index"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">게시판</a>
+            </li>
+        </ul>
+
+
+        <div class="dropdown text-end my-3">
+            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+               aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="mdo" width="50" height="50" class="rounded-circle">
+            </a>
+            <ul class="dropdown-menu text-small">
+                <li><a class="dropdown-item" href="/member/info">내 정보</a></li>
+                <li><a class="dropdown-item" href="/member/info-password-update">비밀번호 변경</a></li>
+                <li><a class="dropdown-item" href="/member/withdraw">회원탈퇴</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="/member/logout">로그아웃</a></li>
+            </ul>
+        </div>
+    </header>
+</div>
+
+<div class="container row" style="float: none; margin:100px auto;">
+    <div class="col-md-3" style="float: none; margin:0 auto;">
+<br>
+        <div>
+            <a>
+                <img class="rounded mx-auto d-block" src="/files/logo.png" width="350px">
+            </a>
+        </div>
+
+<hr/>
+<div>
+    <a href="/member/info" style="text-decoration:none">회원 정보 수정</a>
+    |
+    <a href="/member/info-password-update" style="text-decoration:none">비밀번호 변경</a>
+    |
+    <a href="/member/withdraw" style="text-decoration:none">회원탈퇴</a>
+    <hr style="margin-left:auto; margin-right:auto"/>
+</div>
+
+<div class="list">
+    <form id="updateForm" method="post">
+        <table>
+            <tbody>
+            <tr>
+                <th >아이디</th> <!--수정불가 -->
+                <td ><p th:text="${detail.userId}">아이디</p></td>
+            </tr>
+            <tr>
+                <th>이름</th><!--수정불가 -->
+                <td><p th:text="${detail.userName}">이름</p></td>
+            </tr>
+            <tr>
+                <th>보유포인트</th>
+                <td><p th:text="${detail.point}"></p></td>
+            </tr>
+            <tr>
+                <th>기부한포인트</th>
+                <td><p th:text="${detail.donatedPoint}"></p></td>
+            </tr>
+            <tr>
+                <th >핸드폰 번호</th>   <!--수정가능 -->
+                <td ><input name="userPhoneNumber" type="text" th:value="${detail.userPhoneNumber}" class="form-control" placeholder="핸드폰 번호를 입력해주세요."  required /></td>
+            </tr>
+            <tr>
+                <th >주소</th>   <!--수정가능 -->
+                <td >
+                    <div><input name="zipcode" id="zipcode" type="text" th:value="${detail.zipcode}" readonly placeholder="우편 번호 입력" class="form-control" />
+                         <button onclick="execDaumPostcode()" type="button" class="btn btn-outline-primary">우편번호 찾기</button>
+                    </div>
+                    <div>
+                        <input type="text" id="address" name="address" th:value="${detail.address}" readonly placeholder="주소 입력" class="form-control" />
+                        <input type="text" id="addressDetail" name="addressDetail" th:value="${detail.addressDetail}" placeholder="상세 주소 입력" class="form-control" required >
+                    </div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>가입일</td>
+                <th><p th:text="${detail.getRegDtText()}">가입일</p></th>
+            </tr>
+            <tr>
+                <td>회원 정보 수정일</td>
+                <th><p th:text="${detail.getUdtDtText()}">가입일</p></th>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+            <button class="btn btn-outline-primary" type="submit">수정</button>
+
+            <a href="/member/withdraw" class="btn btn-outline-primary" >회원탈퇴</a>
+
+            <a href="/" class="btn btn-outline-primary">돌아가기</a>
+        </div>
+        <br><br><br><br><br><br>
+    </form>
+
+</div>
+    </div>
+</div>
+
+
+<!--우편번호 찾기 API-->
+
+
+<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
+    <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
+</div>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    // 우편번호 찾기 찾기 화면을 넣을 element
+    var element_wrap = document.getElementById('wrap');
+
+    function foldDaumPostcode() {
+        // iframe을 넣은 element를 안보이게 한다.
+        element_wrap.style.display = 'none';
+    }
+
+    function execDaumPostcode() {
+        // 현재 scroll 위치를 저장해놓는다.
+        var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    // document.getElementById("sample3_extraAddress").value = extraAddr;
+
+                } else {
+                    // document.getElementById("sample3_extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('zipcode').value = data.zonecode;
+                document.getElementById("address").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("addressDetail").focus();
+
+                // iframe을 넣은 element를 안보이게 한다.
+                // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
+                element_wrap.style.display = 'none';
+
+                // 우편번호 찾기 화면이 보이기 이전으로 scroll 위치를 되돌린다.
+                document.body.scrollTop = currentScroll;
+            },
+            // 우편번호 찾기 화면 크기가 조정되었을때 실행할 코드를 작성하는 부분. iframe을 넣은 element의 높이값을 조정한다.
+            onresize : function(size) {
+                element_wrap.style.height = size.height+'px';
+            },
+            width : '100%',
+            height : '100%'
+        }).embed(element_wrap);
+
+        // iframe을 넣은 element를 보이게 한다.
+        element_wrap.style.display = 'block';
+    }
+</script>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="fragment-nav-user1">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 shadow-lg sticky-top">
+            <div class="container">
+                <a href="index.html" class="a.navbar-brand align-middle">
+                    <h3 class="m-0">
+                        <img src="/static/assets/image/s2_logo.png" alt="Logo" height="54px">
+                    </h3>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-targer="#navbarSurrportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-3 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="/food/list" id="navbarDropdown1" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Food
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/food/list">Food</a>
+                                <a class="dropdown-item" href="/food/add">AddFood</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="/recipe/api-recipe" id="navbarDropdown2"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Recipe
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/recipe/api-recipe">Recipe</a>
+                                <a class="dropdown-item" href="/recipe/my-recipe">MyRecipe</a>
+                                <a class="dropdown-item" href="/recipe/add">AddRecipe</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="nav" href="/member/info">내정보</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/member/logout">로그아웃</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+
+</body>
+</html>

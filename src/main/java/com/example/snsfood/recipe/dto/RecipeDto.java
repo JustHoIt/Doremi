@@ -70,8 +70,10 @@ public class RecipeDto {
     private String manualImg19;
     private String manualImg20;
 
-    long totalCount;
-    long seq;
+    private long totalCount;
+    private long seq;
+    private String searchType;
+    private String searchValue;
 
     public static RecipeDto of(Recipe recipe) {
 

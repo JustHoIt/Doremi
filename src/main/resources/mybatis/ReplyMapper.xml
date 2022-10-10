@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.snsfood.Reply.mapper.ReplyMapper">
+
+    <select id="selectListCount" resultType="long">
+        select count(*)
+        from reply
+        where open_yn = 1
+          and bid = #{bid}
+    </select>
+
+    <select id="selectList" resultType="com.example.snsfood.Reply.dto.ReplyDto">
+        select *
+        from reply
+        where open_yn = 1
+          and bid = #{bid}
+        order by reg_dt
+    </select>
+
+</mapper>

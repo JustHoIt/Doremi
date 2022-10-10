@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.snsfood.food.mapper.FoodMapper">
+
+    <sql id="selectListWhere">
+        <if test="searchType != null and searchValue != null">
+            <choose>
+                <when test="searchType == 'foodNm'">
+                    and food_nm like concat('%', #{searchValue}, '%')
+                </when>
+            </choose>
+        </if>
+
+    </sql>
+
+    <select id="selectListCount" resultType="long">
+        select count(*)
+        from food
+        where user_id = #{userId} and
+              use_yn = 0
+        <include refid="selectListWhere"/>
+    </select>
+
+    <select id="selectList" resultType="com.example.snsfood.food.dto.FoodDto">
+        select *
+        from food
+        where user_id = #{userId} and
+              use_yn = 0
+        <include refid="selectListWhere"/>
+
+        limit #{pageStart}, #{pageEnd}
+    </select>
+
+    <select id="selectMainFoodList" resultType="com.example.snsfood.food.dto.FoodDto">
+        select *, timestampdiff(day, curdate(), exp_dt) as diff_day
+        from food
+        where user_id = #{userId} and
+              use_yn = 0
+        order by exp_dt;
+    </select>
+
+    <update id="useFood">
+        update food
+        set use_yn = true
+        where id = #{foodId}
+    </update>
+
+</mapper>

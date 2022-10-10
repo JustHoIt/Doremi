@@ -1,0 +1,48 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+src/main/resources/application-API-KEY.properties.properties
+src/main/resources/application.yml
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+*.yml
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+!**/OwlCarousel2-2.3.4/
+/res/
+### VS Code ###
+.vscode/
+*.js
+*.json
+*.png
+*.hbs
+*.map
+*.css
+*.yml
+*.properties
+*.gradle
+*.jpg
+*.jpeg
+*.gif

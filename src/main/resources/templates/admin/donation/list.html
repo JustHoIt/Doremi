@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>기부 리스트입니다.</h1>
+<table>
+    <thead>
+    <tr>
+        <th>
+            <a>이름</a>
+        </th>
+        <th>
+            <a>종료 날짜</a>
+        </th>
+        <th>
+            <a>요약</a>
+        </th>
+        <th>
+            <a>모금금액</a>
+        </th>
+        <th>
+            <a>자세히보기</a>
+        </th>
+    </tr>
+    <a th:text="${totalCount}">전체수량</a>
+    </thead>
+    <tbody>
+    <tr th:each="x, i : ${list}">
+        <td>
+            <a th:text="${x.title}"> 제목</a>
+        </td>
+        <td>
+            <a th:text="${x.expDt}">종료일자</a>
+        </td>
+        <td>
+            <a th:text="${x.contents}">요약</a>
+        </td>
+        <td>
+            <a th:text="${x.point}"></a>
+        </td>
+        <td>
+            <button type="button" th:onclick="'location.href=\'donation?id='+ @{${x.id}} + '\''">자세히보기</button>
+        </td>
+    </tr>
+    </tbody>
+    <div>
+        <a href ="/admin/donation/write.do">등록</a>
+        <button id = "deleteButton" type="button">삭제</button>
+    </div>
+</table>
+</body>
+</html>

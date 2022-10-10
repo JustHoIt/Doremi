@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>S&S Food - Food 추가</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/signin.css}" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        @media (min-width: 979px) {
+            ul.nav li.dropdown:hover > ul.dropdown-menu {
+                display: block;
+            }
+        }
+        .detail table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .detail table th, .detail table td {
+            border: solid 1px #000;
+        }
+
+        /*.buttons {*/
+        /*    margin-top: 20px;*/
+        /*   ] text-align: center;*/
+        /*}*/
+
+        /*.buttons a, .buttons button {*/
+        /*    border-width: 0;*/
+        /*    background-color: transparent;*/
+        /*    text-decoration: underline;*/
+        /*    font-size: 14px;*/
+        /*    line-height: 20px;*/
+        /*    height: 20px;*/
+        /*    color: #000;*/
+        /*    cursor: pointer;*/
+        /*}*/
+
+        .detail {
+            text-align: center;
+        }
+
+        .bg-light{
+            height: 1053px;
+            padding-top:55px;
+            padding-bottom: 75px;
+        }
+        .container.py-4{
+            margin: 0 auto;
+            width: 503px;
+        }
+    </style>
+
+</head>
+<body class="text-center">
+<div class="container" id="top">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <a href="/" class="navbar-brand d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <img src="/images/logo_wide.png" alt="Logo" height="100px">
+        </a>
+
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-end mb-md-0">
+            <li class="nav-item">
+                <a class="nav-link" href="#"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">소개</a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">
+                    식품
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                    <li><a class="dropdown-item" href="/food/list" style="color:rgb(87, 87, 87);">목록</a></li>
+                    <li><a class="dropdown-item" href="/food/add" style="color:rgb(87, 87, 87);">식품추가</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">
+                    레시피
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                    <li><a class="dropdown-item" href="/recipe/api-recipe" style="color:rgb(87, 87, 87);">공용 레시피 목록</a>
+                    </li>
+                    <li><a class="dropdown-item" href="/recipe/my-recipe" style="color:rgb(87, 87, 87);">나만의 레시피 목록</a>
+                    </li>
+                    <li><a class="dropdown-item" href="/recipe/add" style="color:rgb(87, 87, 87);">나만의 레시피 추가</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">고객센터</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/board/index"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">게시판</a>
+            </li>
+        </ul>
+
+
+        <div class="dropdown text-end my-3">
+            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+               aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="mdo" width="50" height="50" class="rounded-circle">
+            </a>
+            <ul class="dropdown-menu text-small">
+                <li><a class="dropdown-item" href="/member/info">내 정보</a></li>
+                <li><a class="dropdown-item" href="/member/info-password-update">비밀번호 변경</a></li>
+                <li><a class="dropdown-item" href="/member/withdraw">회원탈퇴</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="/member/logout">로그아웃</a></li>
+            </ul>
+        </div>
+    </header>
+</div>
+
+<!--<div th:replace="/fragments/layout.html :: fragment-admin-body-menu"></div>-->
+
+
+
+<!--<details>-->
+<!--    <summary> 스캐너 펼치기 </summary>-->
+<!--    <div>-->
+<!--        <button type="button" class="button" id="startButton">Start</button>-->
+<!--        <button type="button" class="button" id="resetButton">Reset</button>-->
+<!--    </div>-->
+<!--    <div id="sourceSelectPanel" style="display:none">-->
+<!--        <label for="sourceSelect">Change video source:</label>-->
+<!--        <select id="sourceSelect" style="max-width:400px">-->
+<!--        </select>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <video id="video" width="300" height="200" style="border: 1px solid gray"></video>-->
+<!--    </div>-->
+
+
+<!--</details>-->
+<section class="bg-light">
+    <h1>식품 등록</h1><br><br>
+    <div class="detail">
+        <form id="submitForm" method="post" enctype="multipart/form-data">
+            <div class="container py-4">
+                <div class="form-group">
+                    <label>이미지등록</label>
+                    <input class="form-control" style="margin-bottom: 20px;" type="file" name="file" required>
+                    <div th:if="${not #strings.isEmpty(detail.urlFilename)}">
+                        <img th:src="${detail.urlFilename}" style="width: 150px" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="foodNm">식품이름</label>
+                    <input class="form-control" style="margin-bottom: 20px;" th:value="${detail.foodNm}" id="foodNm" type="text" name="foodNm" placeholder="레시피의 이름을 입력해주세요" />
+                </div>
+                <div class="form-group">
+                    <label for="barCode">바코드</label><br>
+                    <input class="form-control" style="width: 409px; float: left;" th:value="${detail.barCode}" type="text" name="barCode" id="barCode" placeholder="바코드를 입력해주세요" />
+                    <button type="button" class="btn btn-outline-primary" onclick="checkBarCode()" style="width: 70px; float: left">Check</button>
+                    <details style="margin-bottom: 20px;">
+                        <summary style="color: blue"> 스캐너 펼치기</summary>
+                        <div>
+                            <button type="button" class="button" id="startButton">Start</button>
+                            <button type="button" class="button" id="resetButton">Reset</button>
+                        </div>
+                        <div id="sourceSelectPanel" style="display:none">
+                            <label for="sourceSelect">Change video source:</label>
+                            <select id="sourceSelect" style="max-width:400px">
+                            </select>
+                        </div>
+                        <div>
+                            <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
+                        </div>
+                    </details>
+                </div>
+                <div class="form-group">
+                    <label for="foodTp">식품 구분</label>
+                    <input class="form-control" style="margin-bottom: 20px;" th:value="${detail.foodTp}" id="foodTp" type="text" name="foodTp" placeholder="식품구분을 입력해주세요" required/>
+                </div>
+                <div class="form-group">
+                    <label for="foodStorage">보관방법</label>
+                    <select class="form-control" style="margin-bottom: 20px;" th:value="${detail.foodStorage}" id="foodStorage" autocomplete="foodStorage"
+                            name="foodStorage" required>
+                        <option th:selected="${#strings.equals(param.foodStorage, '냉장보관')}" value="냉장보관">냉장보관</option>
+                        <option th:selected="${#strings.equals(param.foodStorage, '냉동보관')}" value="냉동보관">냉동보관</option>
+                        <option th:selected="${#strings.equals(param.foodStorage, '상온보관')}" value="상온보관">상온보관</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="foodOt">키워드구분</label>
+                    <input class="form-control" style="margin-bottom: 20px;" th:value="${detail.foodOt}" id="foodOt" type="text" name="foodOt" placeholder="원재료를 입력해주세요" required/>
+                </div>
+                <div class="form-group">
+                    <label for="foodQt">수량</label>
+                    <input class="form-control" style="margin-bottom: 20px;" th:value="${detail.foodQt}" id="foodQt" type="text" name="fooQt" placeholder=" 수량을 입력해주세요" required/>
+                </div>
+                <div class="form-group">
+                    <label for="foodMm">제조회사</label>
+                    <input class="form-control" style="margin-bottom: 20px;" th:value="${detail.foodMm}" id="foodMm" type="text" name="foodMm" placeholder="제조사를 입력해주세요" />
+                </div>
+                <div class="form-group">
+                    <label for="buyDt">구매일자</label>
+                    <input class="form-control" style="margin-bottom: 20px;" th:value="${detail.buyDt}" id="buyDt" type="date" name="buyDt" min="2000-01-01" max="9999-12-31" required/>
+                </div>
+                <div class="form-group">
+                    <label for="expDt">유통기한</label>
+                    <input class="form-control" style="margin-bottom: 20px;" th:value="${detail.expDt}" id="expDt" type="date" name="expDt" min="2000-01-01" max="9999-12-31" required/>
+                    <pre><code id="storage"></code></pre>
+                </div>
+                <div class="btn-group" style="width: 478px">
+                    <button class="btn btn-outline-primary" th:if="${editMode}" type="submit">식품 수정</button>
+                    <button class="btn btn-outline-primary" th:if="${!editMode}" type="submit">식품 등록</button>
+                    <a class="btn btn-outline-primary" href="/food/list">목록 이동</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function checkBarCode() { //아이디 유효성 검사
+        var barCode = $('#barCode').val(); //id값이 "id"인 입력란의 값을 저장
+
+
+        $.ajax({
+            url: '/food/checkBarCode',
+            type: 'post',
+            data: {'barCode': barCode},
+            success: function (result) {
+                if (result != null) {
+                    // $(".input>input[name="foodNm"]).val(PRDLST_NM)
+                    $("#foodNm").attr('value', result.PRDLST_NM);
+                    $("#foodTp").attr('value', result.PRDLST_DCNM);
+                    document.getElementById('storage').textContent = result.POG_DAYCNT
+
+                    // document.getElementById('foodNm').value='PRDLST_NM'
+                    // alert(result.PRDLST_NM);
+                    alert(JSON.stringify(result));
+                } else {
+                    alert("실패했습니다.");
+                    return false;
+                }
+            },
+            error: function () {
+                alert("바코드정보가 없습니다.");
+            }
+        });
+    };
+</script>
+
+<!--qr코드, 바코드 스캐너-->
+<script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
+<script type="text/javascript">
+    window.addEventListener('load', function () {
+        let selectedDeviceId;
+        const codeReader = new ZXing.BrowserBarcodeReader()
+        console.log('ZXing code reader initialized')
+        codeReader.getVideoInputDevices()
+            .then((videoInputDevices) => {
+                const sourceSelect = document.getElementById('sourceSelect')
+                selectedDeviceId = videoInputDevices[0].deviceId
+                if (videoInputDevices.length > 1) {
+                    videoInputDevices.forEach((element) => {
+                        const sourceOption = document.createElement('option')
+                        sourceOption.text = element.label
+                        sourceOption.value = element.deviceId
+                        sourceSelect.appendChild(sourceOption)
+                    })
+
+                    sourceSelect.onchange = () => {
+                        selectedDeviceId = sourceSelect.value;
+                    }
+
+                    const sourceSelectPanel = document.getElementById('sourceSelectPanel')
+                    sourceSelectPanel.style.display = 'block'
+                }
+
+                document.getElementById('startButton').addEventListener('click', () => {
+                    codeReader.decodeOnceFromVideoDevice(selectedDeviceId, 'video').then((result) => {
+                        console.log(result)
+                        document.getElementById('barCode').value = result.text
+                    }).catch((err) => {
+                        console.error(err)
+                        document.getElementById('barCode').value = err
+                    })
+                    console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
+                })
+
+                document.getElementById('resetButton').addEventListener('click', () => {
+                    document.getElementById('barCode').value = '';
+                    codeReader.reset();
+                    console.log('Reset.')
+                })
+
+            })
+            .catch((err) => {
+                console.error(err)
+            })
+    })
+</script>
+</body>
+</html>

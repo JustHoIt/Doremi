@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>글쓰기</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/signin.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container" id="top">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <a href="/" class="navbar-brand d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <img src="/images/logo_wide.png" alt="Logo" height="100px">
+        </a>
+
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-end mb-md-0">
+            <li class="nav-item">
+                <a class="nav-link" href="#"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">소개</a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">
+                    식품
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                    <li><a class="dropdown-item" href="/food/list" style="color:rgb(87, 87, 87);">목록</a></li>
+                    <li><a class="dropdown-item" href="/food/add" style="color:rgb(87, 87, 87);">식품추가</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">
+                    레시피
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                    <li><a class="dropdown-item" href="/recipe/api-recipe" style="color:rgb(87, 87, 87);">공용 레시피 목록</a>
+                    </li>
+                    <li><a class="dropdown-item" href="/recipe/my-recipe" style="color:rgb(87, 87, 87);">나만의 레시피 목록</a>
+                    </li>
+                    <li><a class="dropdown-item" href="/recipe/add" style="color:rgb(87, 87, 87);">나만의 레시피 추가</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">고객센터</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/board/index"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">게시판</a>
+            </li>
+        </ul>
+
+
+        <div class="dropdown text-end my-3">
+            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+               aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="mdo" width="50" height="50" class="rounded-circle">
+            </a>
+            <ul class="dropdown-menu text-small">
+                <li><a class="dropdown-item" href="/member/info">내 정보</a></li>
+                <li><a class="dropdown-item" href="/member/info-password-update">비밀번호 변경</a></li>
+                <li><a class="dropdown-item" href="/member/withdraw">회원탈퇴</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="/member/logout">로그아웃</a></li>
+            </ul>
+        </div>
+    </header>
+</div>
+
+<div class="detail">
+    <form id="submitForm" method="post" enctype="multipart/form-data">
+
+        <div>
+            <input th:value="${detail.title}" type="text" id="title" name="title" placeholder="제목을 입력해주세요" minlength="3" />
+        </div>
+
+        <div>
+            <a>게시판 종류를 선택해주세요</a>
+            <select th:value="${detail.categoryCode}" id="categoryCode" autocomplete="categoryCode" class="" name="categoryCode" required>
+                <option th:selected="${#strings.equals(param.categoryCode, 'freeBoard')}" value="freeBoard">자유게시판</option>
+                <option th:selected="${#strings.equals(param.categoryCode, 'tipBoard')}" value="tipBoard">팁게시판</option>
+            </select>
+        </div>
+        <div>
+            <a>파일 선택</a><input type="file" name="file" />
+        </div>
+        <div>
+        <textarea  th:value="${detail.contents}" id="contents" name="contents"
+                   placeholder="내용을 입력해주세요"></textarea>
+        </div>
+        <div>
+            <button th:if="${editMode}"  type="submit">게시글 수정</button>
+            <button th:if="${!editMode}"  type="submit">게시글 등록</button>
+            <a href="/recipe/my-recipe">목록 이동</a>
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#submitForm').on('submit', function () {
+
+            // 에디터의 내용이 textarea에 적용된다.
+            oEditors.getById["rcpManual"].exec("UPDATE_CONTENTS_FIELD", []);
+        });
+
+
+    });
+</script>
+</head>
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="/res/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+    var oEditors = [];
+
+    setTimeout(function () {
+        nhn.husky.EZCreator.createInIFrame({
+            oAppRef: oEditors,
+            elPlaceHolder: "rcpManual",
+            sSkinURI: "/res/se2/SmartEditor2Skin.html",
+            fCreator: "createSEditor2"
+        });
+
+
+    }, 100);
+
+</script>
+</body>
+</html>

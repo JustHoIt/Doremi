@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/signin.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container" id="top">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <a href="/" class="navbar-brand d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <img src="/images/logo_wide.png" alt="Logo" height="100px">
+        </a>
+
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-end mb-md-0">
+            <li class="nav-item">
+                <a class="nav-link" href="#"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">소개</a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">
+                    식품
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                    <li><a class="dropdown-item" href="/food/list" style="color:rgb(87, 87, 87);">목록</a></li>
+                    <li><a class="dropdown-item" href="/food/add" style="color:rgb(87, 87, 87);">식품추가</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">
+                    레시피
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                    <li><a class="dropdown-item" href="/recipe/api-recipe" style="color:rgb(87, 87, 87);">공용 레시피 목록</a>
+                    </li>
+                    <li><a class="dropdown-item" href="/recipe/my-recipe" style="color:rgb(87, 87, 87);">나만의 레시피 목록</a>
+                    </li>
+                    <li><a class="dropdown-item" href="/recipe/add" style="color:rgb(87, 87, 87);">나만의 레시피 추가</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">고객센터</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/board/index"
+                   style="font-size:large; font-weight: bold; margin-left: 20px; color: #7ebc89;">게시판</a>
+            </li>
+        </ul>
+
+
+        <div class="dropdown text-end my-3">
+            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+               aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="mdo" width="50" height="50" class="rounded-circle">
+            </a>
+            <ul class="dropdown-menu text-small">
+                <li><a class="dropdown-item" href="/member/info">내 정보</a></li>
+                <li><a class="dropdown-item" href="/member/info-password-update">비밀번호 변경</a></li>
+                <li><a class="dropdown-item" href="/member/withdraw">회원탈퇴</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="/member/logout">로그아웃</a></li>
+            </ul>
+        </div>
+    </header>
+</div>
+
+<hr/>
+<div>
+    <a href="/board/index">게시판 홈</a>
+    |
+    <a href="#">공지사항</a>
+    |
+    <a href="/board/freeBoard">자유게시판</a>
+    |
+    <a href="#">나눔게시판</a>
+</div>
+<hr/>
+<br>
+<div class="detail">
+    <div>
+        <a id="id" th:text="${detail.id}">글번호</a>
+    </div>
+    <div>
+        <a id="userId" th:text="${detail.userId}">작성자</a>
+    </div>
+    <div>
+        <a id="title" th:text="${detail.title}">제목</a>
+    </div>
+    <hr>
+    <div>
+        <a id="contents" th:text="${detail.contents}">내용</a>
+    </div>
+    <div>
+        <button id="deleteButton" type="button">
+            삭제
+        </button>
+        <a th:onclick="'location.href=\'edit?id='+ @{${detail.id}} + '\''">
+            수정
+        </a>
+    </div>
+</div>
+<div>
+    <form method="post" action="/reply/write">
+        <p>
+            <label>댓글 작성자</label>
+            <input type="text" th:value="${userId}" name="userId" readonly/>
+        </p>
+        <p>
+            <textarea rows="5" cols="50" name="contents"></textarea>
+        </p>
+        <input type="hidden" name="bid" th:value="${detail.id}">
+        <p>
+            <button type="submit">댓글 작성</button>
+        </p>
+    </form>
+</div>
+<!--댓글 보여주기-->
+<div>
+    <a><span>작성자 || 내용 || 작성시간</span></a>
+    <div th:each="x : ${list}">
+
+        <a th:text="${x.userId}">작성자</a>
+        <a>     ||     </a>
+        <a th:text="${x.contents}">내용</a>
+        <a>     ||     </a>
+        <a th:text="${x.regDt}">작성시간</a>
+
+    </div>
+</div>
+
+<form name="deleteForm" method="post" action="/board/delete">
+    <input type="hidden" name="deleteId"/>
+</form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function checkBarCode() { //아이디 유효성 검사
+        var id = $('#id').val(); //id값이 "id"인 입력란의 값을 저장
+
+
+        $.ajax({
+            url: '/board/delete',
+            type: 'delete',
+            data: {'id': id},
+            success: function (result) {
+                if (result != null) {
+                    alert('글이 삭제되었습니다.');
+                    window.location.href = '/';
+                } else {
+                    alert("실패했습니다.");
+                    return false;
+                }
+            },
+            error: function () {
+                alert("오류입니다.");
+            }
+        });
+    };
+</script>
+
+
+</body>
+</html>
