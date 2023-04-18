@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.snsfood.admin.mapper.InquiryMapper">
+
+    <select id="selectListCount" resultType="long">
+        select count(*)
+        from inquiry
+        where 1 = 1;
+    </select>
+
+
+    <select id="selectListNoCount" resultType="long">
+        select count(*)
+        from inquiry
+        where do_yn = false;
+    </select>
+
+    <select id="selectList" resultType="com.example.snsfood.board.model.InquiryDto">
+        select *
+        from inquiry
+        where 1 = 1;
+
+    </select>
+
+    <select id="selectListCount2" resultType="long">
+        select count(*)
+        from inquiry
+        where do_yn = #{solved};
+    </select>
+
+    <select id="selectList2" resultType="com.example.snsfood.board.model.InquiryDto">
+        select *
+        from inquiry
+        where do_yn = #{solved};
+
+    </select>
+
+
+</mapper>
