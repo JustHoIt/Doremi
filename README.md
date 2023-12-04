@@ -6,7 +6,7 @@
 
 ## 기술스택
 * FrotEnd : HTML, JavaScript, css, Bootstrap, ajax, thymeleaf
-* BackEnd : java, Spring boot, Spring security, mybatis, JPA
+* BackEnd : java, Spring boot, Spring security, mybatis
 
 ## 구현기능
 1. 자유게시판에서 게시글, 댓글을 작성, 수정 삭제를 할 수 있으며, 문의하기를 통해서 관리자에게 문의를 할 수 있습니다.
